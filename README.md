@@ -62,6 +62,16 @@ Multiple-choice quizzes covering all major topics.
 - [Quiz: Signal Integrity](07_quizzes/quiz_signal_integrity.md)
 - [Quiz: System](07_quizzes/quiz_system.md)
 
+### 08 PCB Level Layout
+Detailed PCB-level design considerations for LPDDRx interfaces, covering the full SoC-to-DRAM channel on the board.
+
+- [PCB Stackup Choice](08_pcb_level_layout/pcb_stackup_choice.md) -- Layer count, dielectric materials, impedance targets, microstrip versus stripline, back-drill feasibility, reference-plane strategy.
+- [PCB Signal Integrity](08_pcb_level_layout/pcb_signal_integrity.md) -- Channel loss budget, insertion loss, reflections, crosstalk, via stubs, fibre-weave effect, SSO noise, full-channel simulation.
+- [PCB Power Integrity](08_pcb_level_layout/pcb_power_integrity.md) -- LPDDR supply rails, target impedance, decoupling hierarchy, embedded capacitance, IR drop, PMIC placement, cap de-rating, PDN integration.
+- [PCB Timing](08_pcb_level_layout/pcb_timing.md) -- UI and flight-time budgets, intra-byte/inter-byte/CA-CK matching, flight-time versus physical-length matching, jitter accumulation, training algorithm interaction.
+- [PCB Thermal](08_pcb_level_layout/pcb_thermal.md) -- LPDDR power dissipation, junction temperature limits, heat-conduction paths, thermal vias, copper pour, placement, thermal-electrical coupling, verification.
+- [PCB Testing and Compliance](08_pcb_level_layout/pcb_testing_and_compliance.md) -- Test equipment, JEDEC compliance, training margin measurement, shmoo plots, manufacturing variation, bringup flow, DFT features, EMC.
+
 ## How to Use
 
 1. **Sequential study** -- Work through sections 01 through 06 in order to build knowledge from fundamentals to system-level concerns.
@@ -82,4 +92,4 @@ Contributions are welcome. Please open an issue or submit a pull request if you 
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-Last updated: 2026-04-07
+Last updated: 2026-04-11
