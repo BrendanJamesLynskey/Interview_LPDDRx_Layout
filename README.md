@@ -86,10 +86,16 @@ Contributions are welcome. Please open an issue or submit a pull request if you 
 
 ## Related Repositories
 
-- Interview preparation repositories for related physical design topics (coming soon).
+| Repository | How it relates |
+| --- | --- |
+| **[Signal Integrity &amp; High-Speed Digital Design](https://github.com/BrendanJamesLynskey/Signal_Integrity)** | The computed companion to this material. [Timing, flight time and the budget](https://brendanjameslynskey.github.io/Signal_Integrity/09-timing-and-budgets/) covers the source-synchronous budget a parallel memory bus lives in; [Return paths](https://brendanjameslynskey.github.io/Signal_Integrity/02-return-paths/), [Crosstalk](https://brendanjameslynskey.github.io/Signal_Integrity/06-crosstalk/) and [Power integrity](https://brendanjameslynskey.github.io/Signal_Integrity/07-power-integrity/) compute the mechanisms sections 05 and 06 describe |
+| [High-Speed Serial Links &mdash; interview preparation](https://github.com/BrendanJamesLynskey/Interview_High_Speed_Serial_Links) | The serial counterpart to this parallel-bus material |
+| [Equalisation in High-Speed Serial Links](https://github.com/BrendanJamesLynskey/SerDes_Equalisation) | Why the industry serialised: one backplane channel worked to a link budget |
+| [Modern SoC Design](https://github.com/BrendanJamesLynskey/SoC) | Deck 03 on memory hierarchy and deck 09 on power delivery |
+| [Hardware](https://github.com/BrendanJamesLynskey/Hardware#signal-integrity--high-speed-digital-design) | The index this sits in |
 
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-Last updated: 2026-04-11
+Last updated: 2026-09-17
