@@ -3,7 +3,7 @@
 ## Problem Statement
 
 An SoC die measures 10 mm x 10 mm. The following blocks must be placed:
-- LPDDR5 PHY: 4-channel x32 interface, requires 4 mm of die edge, 0.5 mm deep
+- LPDDR5 PHY: x32 interface (2 channels × 16 bits), requires 4 mm of die edge (set by the bump field rather than the IO cells), 0.5 mm deep
 - Memory controller: 1.5 mm x 0.8 mm
 - GPU: 4 mm x 3 mm (high power, 3W)
 - CPU cluster: 3 mm x 2 mm (high power, 2W)
@@ -39,6 +39,7 @@ Place these on the remaining edges:
 Centre the PHY on the top edge for symmetric bump map alignment:
 - PHY occupies top edge from x=3 mm to x=7 mm (centred)
 - PHY depth: from y=9.5 mm to y=10 mm (top 0.5 mm of the die)
+- Channel A occupies x=3 to x=5 mm and channel B x=5 to x=7 mm. Each channel's CA block sits between its two byte lanes, and the shared PLL sits at the channel boundary (x=5 mm).
 
 ### Step 4: Place the memory controller
 

@@ -2,7 +2,7 @@
 
 ## Problem Statement
 
-Design the CK clock distribution from a centrally placed PLL to 4 byte lanes arranged in a row along the die edge. The byte lanes are at positions X = 0, 1.0, 2.0, and 3.0 mm from the left edge. The PLL is at X = 1.5 mm (centred). The CK output from the PLL must reach each byte lane's CA IO cell with less than 10 ps of skew.
+Design the clock distribution from a centrally placed PLL to the 4 byte lanes of an x32 LPDDR5 PHY, arranged in a row along the die edge. The byte lanes are at positions X = 0 and 1.0 mm (channel A) and 2.0 and 3.0 mm (channel B) from the left edge. The PLL is at X = 1.5 mm (centred). In LPDDR5 each byte lane is clocked by its own WCK, so the PLL clock must reach each byte lane's WCK/DQ serialiser with less than 10 ps of skew. (The two CA blocks, one per 16-bit channel, receive CK from separate, shorter branches.)
 
 Given: propagation velocity on M10 = 1.2 x 10^8 m/s (~8.3 ps/mm), buffer delay = 30 ps per stage.
 

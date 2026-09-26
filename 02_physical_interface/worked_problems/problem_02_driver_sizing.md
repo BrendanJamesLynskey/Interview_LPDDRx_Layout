@@ -116,7 +116,7 @@ For 8 DQ pins switching simultaneously (worst case):
 I_total_peak = 8 x 6.25 = 50 mA per byte lane
 ```
 
-For all 4 channels (32 DQ pins):
+For both 16-bit channels (32 DQ pins):
 ```
 I_total = 32 x 6.25 = 200 mA peak switching current
 ```

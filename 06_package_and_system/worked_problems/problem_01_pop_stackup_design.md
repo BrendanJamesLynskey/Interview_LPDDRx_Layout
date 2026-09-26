@@ -48,13 +48,15 @@ TMVs are placed at the periphery of the SoC package (outside the die area). For 
 - At 0.4 mm pitch: approximately (14/0.4) x 4 sides x 2 rows = ~280 TMV positions
 
 TMV allocation for LPDDR x32 interface:
-- Signal TMVs: ~96 (4 channels x 24 signals per channel)
+- Signal TMVs: ~72 (2 channels x 36 signals per channel: 16 DQ, 2 DMI, 2 RDQS pairs, 2 WCK pairs, 7 CA, CK pair, CS; one channel per x16 die)
 - VDDQ TMVs: ~40 (providing low-inductance power delivery)
 - VSS TMVs: ~60 (providing return current paths)
 - VDD2/VDD1 TMVs: ~16
-- Total LPDDR TMVs: ~212
+- Total LPDDR TMVs: ~188
 
-Remaining TMVs: 280 - 212 = 68 for other interfaces and mechanical support.
+Remaining TMVs: 280 - 188 = 92 for other interfaces and mechanical support.
+
+Each die's channel should take its own contiguous stretch of the TMV ring, with each byte's 11 signals (8 DQ, DMI, RDQS pair, WCK pair) grouped next to one another. The byte lanes then stay separate skew groups through the PoP interconnect, as they are on the die.
 
 ### Step 3: Identify SI-critical elements
 
