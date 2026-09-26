@@ -17,9 +17,9 @@ Create a comprehensive comparison of LPDDR4, LPDDR4X, LPDDR5, and LPDDR5X from a
 | VDDQ (V) | 1.1 | 0.6 | 0.5 | 0.5 |
 | VDD1 (V) | 1.8 | 1.8 | 1.8 | 1.8 |
 | VDD2 (V) | 1.1 | 1.1 | 1.05 | 1.05 |
-| Channel width (bits) | 16 | 16 | 8 | 8 |
+| Channel width (bits) | 16 | 16 | 16 | 16 |
 | Channels per die | 2 | 2 | 2 | 2 |
-| Channels for x32 | 2 | 2 | 4 | 4 |
+| Channels for x32 | 2 | 2 | 2 | 2 |
 | Prefetch | 16n | 16n | 16n | 16n |
 | Burst length | BL16 | BL16 | BL16/BL32 | BL16/BL32 |
 | CK type | Differential | Differential | Differential | Differential |
@@ -79,14 +79,14 @@ Despite higher data rates, LPDDR5/5X actually consumes less IO power than LPDDR4
 | Aspect | LPDDR4/4X | LPDDR5/5X |
 |---|---|---|
 | DQ signals per x32 | 32 | 32 |
-| DQS pairs per x32 | 4 (2 per channel x 2 ch) | 4 (1 per channel x 4 ch) |
-| CK pairs per x32 | 2 | 4 |
-| WCK pairs per x32 | 0 | 4 |
-| CA signals per x32 | 12 (6 per ch x 2 ch) | 28 (7 per ch x 4 ch) |
-| CS signals per x32 | 2 | 4 |
-| Total signal count | ~50 | ~76 |
+| DQS pairs per x32 | 4 (2 per channel x 2 ch) | 4 RDQS (2 per channel x 2 ch) |
+| CK pairs per x32 | 2 | 2 |
+| WCK pairs per x32 | 0 | 4 (2 per channel x 2 ch) |
+| CA signals per x32 | 12 (6 per ch x 2 ch) | 14 (7 per ch x 2 ch) |
+| CS signals per x32 | 2 | 2 |
+| Total signal count (wires) | ~58 | ~68 |
 
-LPDDR5/5X has approximately 50% more signals to route due to the doubled channel count and the addition of WCK. This significantly increases routing density and floorplan complexity.
+LPDDR5/5X has about 17% more signals to route, mainly the four added WCK pairs, and the CA bus now runs at double data rate. The added WCK clocks are the densest, most timing-critical routes.
 
 ### Step 6: Determine the most challenging generation
 
@@ -94,7 +94,7 @@ LPDDR5X at 8533 MT/s presents the greatest layout challenge for the following re
 
 1. **Tightest timing budget:** The 117.2ps UI leaves minimal margin after deducting fixed timing components. Every picosecond of layout-induced skew is a larger fraction of the total budget.
 
-2. **Highest signal count:** The 4-channel architecture with WCK requires routing approximately 76 signals per x32 interface versus 50 for LPDDR4.
+2. **Highest signal count:** The added WCK pairs raise the count to approximately 68 signals per x32 interface versus 58 for LPDDR4.
 
 3. **Lowest voltage margin:** At 0.5V VDDQ, the noise budget is 2.2x tighter than LPDDR4 (per unit of VDDQ).
 

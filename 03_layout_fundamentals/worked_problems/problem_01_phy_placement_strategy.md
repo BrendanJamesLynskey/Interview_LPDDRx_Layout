@@ -78,7 +78,7 @@ This separates the high-power blocks from the LPDDR PHY (which also dissipates 0
 - GPU: bottom-left, 3W
 - CPU: bottom-right, 2W
 - No two high-power blocks are adjacent
-- Maximum thermal gradient is diagonal (PHY to GPU), ~14 mm apart
+- The PHY (top centre) and GPU (bottom-left) centres are ~9 mm apart
 
 ### Step 8: Check DFI routing
 

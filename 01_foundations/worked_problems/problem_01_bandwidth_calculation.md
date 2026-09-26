@@ -5,8 +5,8 @@
 Calculate the peak theoretical bandwidth for the following LPDDR configurations and compare them:
 
 1. LPDDR4X at 4267 MT/s with a 32-bit (2 x 16-bit channel) interface
-2. LPDDR5 at 6400 MT/s with a 32-bit (4 x 8-bit channel) interface
-3. LPDDR5X at 8533 MT/s with a 32-bit (4 x 8-bit channel) interface
+2. LPDDR5 at 6400 MT/s with a 32-bit (2 x 16-bit channel) interface
+3. LPDDR5X at 8533 MT/s with a 32-bit (2 x 16-bit channel) interface
 
 Also determine the bandwidth per pin for each configuration.
 
@@ -46,7 +46,7 @@ Verification: 32 x 533.4 MB/s = 17,068 MB/s = 17.07 GB/s (matches)
 ### Step 3: Calculate LPDDR5 bandwidth
 
 ```
-Bus width = 32 bits (4 channels x 8 bits each)
+Bus width = 32 bits (2 channels x 16 bits each)
 Data rate = 6400 MT/s
 
 Bandwidth = 6400 x 10^6 x 32 / 8
@@ -64,7 +64,7 @@ Verification: 32 x 800 = 25,600 MB/s = 25.6 GB/s (matches)
 ### Step 4: Calculate LPDDR5X bandwidth
 
 ```
-Bus width = 32 bits (4 channels x 8 bits each)
+Bus width = 32 bits (2 channels x 16 bits each)
 Data rate = 8533 MT/s
 
 Bandwidth = 8533 x 10^6 x 32 / 8
@@ -85,7 +85,7 @@ Verification: 32 x 1066.6 = 34,131 MB/s ~ 34.13 GB/s (matches)
 |---|---|---|---|
 | Data rate (MT/s) | 4267 | 6400 | 8533 |
 | Bus width (bits) | 32 | 32 | 32 |
-| Channels | 2 x 16-bit | 4 x 8-bit | 4 x 8-bit |
+| Channels | 2 x 16-bit | 2 x 16-bit | 2 x 16-bit |
 | Peak bandwidth (GB/s) | 17.07 | 25.6 | 34.13 |
 | Bandwidth per pin (MB/s) | 533.4 | 800.0 | 1066.6 |
 | Improvement over LPDDR4X | 1.0x | 1.50x | 2.00x |
@@ -96,9 +96,9 @@ The bandwidth increase from LPDDR4X to LPDDR5X is 2x, but the pin count for DQ s
 
 - Tighter impedance control (higher frequency content demands lower reflection coefficients)
 - More aggressive decoupling (higher di/dt on VDDQ supply)
-- Better length matching (the UI shrinks from 468ps at 4267 MT/s to 234ps at 8533 MT/s, halving the absolute timing budget)
+- Better length matching (the UI shrinks from 234ps at 4267 MT/s to 117ps at 8533 MT/s, halving the absolute timing budget)
 
-The shift from 2 x 16-bit channels to 4 x 8-bit channels increases the number of independent control signal groups (CA, CK, WCK) by 2x, requiring more routing resources and careful floorplanning.
+LPDDR5/5X keeps 2 x 16-bit channels for a x32 interface, but adds two differential WCK pairs per channel and runs the CA bus at double data rate, adding high-speed clock routing and tightening CA timing.
 
 ---
 

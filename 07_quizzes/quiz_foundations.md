@@ -10,7 +10,7 @@ Test your knowledge of LPDDR fundamentals, architecture, signaling, and timing.
 - C) 0.5V
 - D) 0.3V
 
-**2.** How many independent 8-bit channels does a typical x32 LPDDR5 system have?
+**2.** How many independent 16-bit channels does a typical x32 LPDDR5 system have?
 - A) 1
 - B) 2
 - C) 4
@@ -105,14 +105,14 @@ Test your knowledge of LPDDR fundamentals, architecture, signaling, and timing.
 ## Answer Key
 
 1. **C** -- LPDDR5 uses 0.5V VDDQ. LPDDR4 uses 1.1V (A), LPDDR4X uses 0.6V (B).
-2. **C** -- A x32 LPDDR5 system uses 4 independent 8-bit channels (2 dies, each with 2 channels).
+2. **B** -- A x32 LPDDR5 system uses 2 independent 16-bit channels (for example 2 x16 dies, one channel each).
 3. **C** -- LPDDR5X supports up to 8533 MT/s. 6400 MT/s is LPDDR5 max; 12800 MT/s is a speculated LPDDR6 target.
 4. **C** -- LPDDR5 uses 16n prefetch. 8n was used in LPDDR3.
 5. **B** -- CK in LPDDR5 uses differential signaling for noise rejection and precise timing.
 6. **C** -- 4:1 WCK:CK ratio at the highest speeds (8533 MT/s).
 7. **C** -- 7 CA signals per LPDDR5 channel.
 8. **B** -- 40 ohm is the typical target impedance for LPDDR5 DQ.
-9. **B** -- UI = 1/6400 MT/s = 156.25 ps. The 312.5 ps value (A) would be the CK period at 2:1 WCK:CK.
+9. **B** -- UI = 1/6400 MT/s = 156.25 ps. The 312.5 ps value (A) is the WCK period (3.2 GHz) at 6400 MT/s.
 10. **C** -- JESD209-5 is the LPDDR5 specification. JESD209-4 is LPDDR4.
 11. **B** -- LPDDR4X reduced VDDQ from 1.1V to 0.6V, keeping the same architecture and data rate.
 12. **C** -- LPDDR5 defines 4 bank groups per channel, with 4 banks per group (16 total).

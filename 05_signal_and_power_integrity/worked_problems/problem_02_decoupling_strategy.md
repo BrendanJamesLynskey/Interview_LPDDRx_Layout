@@ -84,12 +84,11 @@ Resonant frequency of package inductance with on-die capacitance:
 f_res = 1 / (2*pi*sqrt(40e-12 * 560e-12)) = 1.07 GHz
 ```
 
-At resonance, the impedance is limited by the ESR of the capacitors (parallel combination):
-- MIM ESR contribution: 20 mohm (dominant due to largest C)
-- MOS ESR provides damping: 200 mohm in parallel with MIM
-- Effective ESR at resonance: ~19 mohm
+This is a parallel (anti-)resonance between the 40 pH package path and the on-die capacitance, so its peak is not the ESR. The peak is roughly Z0^2 / R, where Z0 = sqrt(L / C) = sqrt(40e-12 / 560e-12) = 267 mohm and R is the loop resistance (~20 mohm, mostly the MIM ESR): about 3.5 ohm. A full calculation with all three capacitor branches gives a peak of about **3.5 ohm at 0.98 GHz — roughly 17x Z_target = 200 mohm. FAILS.**
 
-This is well below Z_target = 200 mohm. The resonance peak is heavily damped.
+Low-ESR capacitors make this peak worse, not better. Two changes are needed together:
+- Z0 must drop below the target: C > L / Z_target^2 = 40e-12 / 0.2^2 = 1.0 nF (the 796 pF from Step 3 is the same message).
+- The loop needs damping resistance comparable to Z0 (e.g. more of the higher-ESR MOS capacitance, or an intentional series resistance in part of the bank).
 
 ### Step 6: Verify transient response
 

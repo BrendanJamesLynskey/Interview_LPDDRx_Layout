@@ -6,7 +6,7 @@ Route one LPDDR5 byte lane (DQ[7:0] + DQS/DQS_n) from the IO cells to the bump p
 
 - Signal trace width: 1.0 um, spacing: 1.0 um (2 um pitch)
 - DQS differential pair: 1.0 um width, 1.5 um intra-pair spacing, 2.0 um spacing to adjacent signals
-- Routing layer: M8 (propagation velocity: 1.5 x 10^8 m/s, ~6.67 ps/um)
+- Routing layer: M8 (propagation velocity: 1.5 x 10^8 m/s, ~6.67 ps/mm = 0.00667 ps/um)
 - Length matching target: all DQ within plus or minus 50 um of DQS length
 - Maximum route length: 300 um (to keep delay reasonable)
 - DQS placed centrally in the byte group
@@ -48,41 +48,41 @@ In practice, the bumps are on a 400 um grid and may not align perfectly with the
 
 | Signal | IO cell X | Bump X | X offset | Route length (straight + jog) |
 |---|---|---|---|---|
-| DQ0 | 10 um | 0 um | -10 um | 200 + 10 = ~201 um |
-| DQ1 | 12 um | 0 um | -12 um | 200 + 12 = ~202 um |
-| DQ2 | 14 um | 20 um | +6 um | 200 + 6 = ~201 um |
-| DQ3 | 16 um | 20 um | +4 um | 200 + 4 = ~200 um |
-| DQS | 19 um | 20 um | +1 um | 200 + 1 = ~200 um (reference) |
-| DQS_n | 21.5 um | 22 um | +0.5 um | 200 + 0.5 = ~200 um |
-| DQ4 | 24 um | 40 um | +16 um | 200 + 16 = ~203 um |
-| DQ5 | 26 um | 40 um | +14 um | 200 + 14 = ~202 um |
-| DQ6 | 28 um | 60 um | +32 um | 200 + 32 = ~206 um |
-| DQ7 | 30 um | 60 um | +30 um | 200 + 30 = ~205 um |
+| DQ0 | 10 um | 0 um | -10 um | 200 + 10 = 210 um |
+| DQ1 | 12 um | 0 um | -12 um | 200 + 12 = 212 um |
+| DQ2 | 14 um | 20 um | +6 um | 200 + 6 = 206 um |
+| DQ3 | 16 um | 20 um | +4 um | 200 + 4 = 204 um |
+| DQS | 19 um | 20 um | +1 um | 200 + 1 = 201 um (reference) |
+| DQS_n | 21.5 um | 22 um | +0.5 um | 200 + 0.5 = 200.5 um |
+| DQ4 | 24 um | 40 um | +16 um | 200 + 16 = 216 um |
+| DQ5 | 26 um | 40 um | +14 um | 200 + 14 = 214 um |
+| DQ6 | 28 um | 60 um | +32 um | 200 + 32 = 232 um |
+| DQ7 | 30 um | 60 um | +30 um | 200 + 30 = 230 um |
 
 ### Step 4: Calculate deviations and add serpentine
 
-Reference length (DQS): 200 um. Deviations:
+Reference length (DQS): 201 um. Deviations:
 
 | Signal | Length | Delta from DQS | Serpentine needed |
 |---|---|---|---|
-| DQ0 | 201 | +1 | 0 (within tolerance) |
-| DQ1 | 202 | +2 | 0 (within tolerance) |
-| DQ2 | 201 | +1 | 0 |
-| DQ3 | 200 | 0 | 0 |
-| DQ4 | 203 | +3 | 0 |
-| DQ5 | 202 | +2 | 0 |
-| DQ6 | 206 | +6 | 0 (within 50 um) |
-| DQ7 | 205 | +5 | 0 |
+| DQ0 | 210 | +9 | 0 (within tolerance) |
+| DQ1 | 212 | +11 | 0 (within tolerance) |
+| DQ2 | 206 | +5 | 0 |
+| DQ3 | 204 | +3 | 0 |
+| DQ4 | 216 | +15 | 0 |
+| DQ5 | 214 | +13 | 0 |
+| DQ6 | 232 | +31 | 0 (within 50 um) |
+| DQ7 | 230 | +29 | 0 |
 
 All deviations are within the plus or minus 50 um tolerance. No serpentine needed in this case.
 
 ### Step 5: Calculate expected skew
 
-Maximum deviation: DQ6 at +6 um from DQS.
-Delay per um: 6.67 ps/um.
-Maximum skew: 6 x 6.67 = 40 ps.
+Maximum deviation: DQ6 at +31 um from DQS.
+Delay per um: 0.00667 ps/um (6.67 ps/mm).
+Maximum skew: 31 x 0.00667 = 0.21 ps.
 
-This 40 ps is within the typical SoC on-die skew allocation of 50-60 ps. After per-bit deskew training, the residual skew would be less than 5 ps (one deskew step).
+This 0.2 ps is negligible against the typical SoC on-die skew allocation of 50-60 ps: at these route lengths, length mismatch is not the skew limiter. Per-bit deskew training removes the other skew sources to within one deskew step.
 
 ---
 

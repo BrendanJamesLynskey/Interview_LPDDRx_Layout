@@ -78,7 +78,7 @@ R_nom_nmos = 180 / (16 x 0.281) = 180 / 4.5 = 40 ohm (matches target)
 R_nom_pmos = 360 / (16 x 0.5625) = 360 / 9.0 = 40 ohm (matches target)
 ```
 
-Range around nominal: from code 11 (28 ohm) to code 23 (56 ohm), which is -30% to +40% of 40 ohm. This exceeds the plus or minus 30% requirement.
+Range around nominal: from code 23 (28 ohm) to code 11 (58 ohm), which is -30% to +45% of 40 ohm (higher code = more legs on = lower impedance). This exceeds the plus or minus 30% requirement.
 
 ### Step 4: Estimate the driver area
 

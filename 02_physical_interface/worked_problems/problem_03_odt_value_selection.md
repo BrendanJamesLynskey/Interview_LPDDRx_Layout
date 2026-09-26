@@ -108,14 +108,14 @@ Assume crosstalk = 10 mV.
 
 ### Step 6: Calculate ODT power consumption
 
-DC power per pin (average for random data):
+DC power per pin (average for random data): current flows from VDDQ through the driver and the ODT only while the pin is high (half the time), so
 ```
-P_ODT = VDDQ^2 / (4 x R_ODT)
+P = VDDQ^2 / (2 x (R_driver + R_ODT))
 ```
 
 Option A: P = 0.25 / 160 = 1.56 mW per pin, 12.5 mW per byte
-Option B: P = 0.25 / 240 = 1.04 mW per pin, 8.3 mW per byte
-Option C: P = 0.25 / 480 = 0.52 mW per pin, 4.2 mW per byte
+Option B: P = 0.25 / 200 = 1.25 mW per pin, 10.0 mW per byte
+Option C: P = 0.25 / 320 = 0.78 mW per pin, 6.3 mW per byte
 
 ### Step 7: Recommendation
 
@@ -126,7 +126,7 @@ Option C: P = 0.25 / 480 = 0.52 mW per pin, 4.2 mW per byte
 | Power consumption | Highest | Moderate | Lowest |
 | **Recommendation** | Conservative | **Optimal** | Risky |
 
-**Option B (60 ohm ODT) is recommended.** It provides good eye height (195 mV, well above the 80 mV threshold), moderate reflections (1.8 mV, negligible), and moderate power consumption (8.3 mW per byte). Option A wastes power for margin that is not needed. Option C, while showing the best eye height in this simple analysis, has larger reflections that could worsen in a more complex channel with additional discontinuities.
+**Option B (60 ohm ODT) is recommended.** It provides good eye height (195 mV, well above the 80 mV threshold), moderate reflections (1.8 mV, negligible), and moderate power consumption (10.0 mW per byte). Option A wastes power for margin that is not needed. Option C, while showing the best eye height in this simple analysis, has larger reflections that could worsen in a more complex channel with additional discontinuities.
 
 In practice, the final ODT selection should be validated with full-channel SI simulation including package and PoP parasitics, and fine-tuned during silicon bring-up using the eye scanning capability of the PHY.
 

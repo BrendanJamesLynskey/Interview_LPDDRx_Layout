@@ -91,12 +91,12 @@ The 43.2 ps timing impact is too large. Mitigation options:
 2. **Add on-die decoupling:** 200 pF of MIM capacitance with 10 pH ESL:
    - Capacitor supplies current during the 100 ps transition
    - V_droop = I*dt/C = 40e-3 * 100e-12 / 200e-12 = 20 mV
-   - But ESL limits: V_ESL = 10 pH x 4e8 = 4 mV
-   - Effective: max(4, 20) = 4 mV from capacitor path (faster response than droop)
+   - Plus the capacitor's own ESL term: V_ESL = 10 pH x 4e8 = 4 mV
+   - So 200 pF alone would let the rail move ~20 mV — worse than the 9.3 mV package path. To bring the charge term down to ~4 mV needs C ≈ 40e-3 * 100e-12 / 4e-3 = 1 nF
 
 3. **Combined (bumps + decoupling):**
    - Package path: 9.3 mV at the bump
-   - On-die MIM provides local current: reduces net noise to ~5-7 mV
+   - ~1 nF of on-die MIM supplies the local current: net noise can come down to ~5-7 mV
    - Timing impact: 5 mV x 3 ps/mV = 15 ps (acceptable)
 
 ### Step 7: Key findings

@@ -94,12 +94,12 @@ The budget closes with 7.55 ps of statistical margin. However, this is thin.
 With these improvements:
 ```
 Linear: 20 + 5 = 25 ps
-RSS: sqrt(8^2 + 5^2 + 6^2 + 5^2 + 5^2 + 3^2 + 3^2) = sqrt(169) = 13 ps
-Total: 25 + 13 = 38 ps
-Margin: 56.25 - 38 = 18.25 ps
+RSS: sqrt(8^2 + 5^2 + 6^2 + 5^2 + 5^2 + 3^2 + 3^2) = sqrt(193) = 13.9 ps
+Total: 25 + 13.9 = 38.9 ps
+Margin: 56.25 - 38.9 = 17.35 ps
 ```
 
-This provides a comfortable 18.25 ps margin, approximately 3 sigma.
+This provides a comfortable 17.35 ps margin, approximately 3 sigma.
 
 ### Step 7: Key takeaways
 

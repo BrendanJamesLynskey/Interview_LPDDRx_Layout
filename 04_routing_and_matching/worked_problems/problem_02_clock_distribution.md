@@ -4,7 +4,7 @@
 
 Design the CK clock distribution from a centrally placed PLL to 4 byte lanes arranged in a row along the die edge. The byte lanes are at positions X = 0, 1.0, 2.0, and 3.0 mm from the left edge. The PLL is at X = 1.5 mm (centred). The CK output from the PLL must reach each byte lane's CA IO cell with less than 10 ps of skew.
 
-Given: propagation velocity on M10 = 1.2 x 10^8 m/s (~8.3 ps/um), buffer delay = 30 ps per stage.
+Given: propagation velocity on M10 = 1.2 x 10^8 m/s (~8.3 ps/mm), buffer delay = 30 ps per stage.
 
 ---
 
@@ -23,12 +23,12 @@ Given: propagation velocity on M10 = 1.2 x 10^8 m/s (~8.3 ps/um), buffer delay =
 
 | Byte Lane | Wire distance (um) | Wire delay (ps) |
 |---|---|---|
-| BL0 | 1500 | 1500 x 8.3 = 12,450 ps |
-| BL1 | 500 | 500 x 8.3 = 4,150 ps |
-| BL2 | 500 | 500 x 8.3 = 4,150 ps |
-| BL3 | 1500 | 1500 x 8.3 = 12,450 ps |
+| BL0 | 1500 | 1.5 mm x 8.3 = 12.45 ps |
+| BL1 | 500 | 0.5 mm x 8.3 = 4.15 ps |
+| BL2 | 500 | 0.5 mm x 8.3 = 4.15 ps |
+| BL3 | 1500 | 1.5 mm x 8.3 = 12.45 ps |
 
-Without any matching: max skew = 12,450 - 4,150 = 8,300 ps. Far too large.
+Without any matching: max skew = 12.45 - 4.15 = 8.3 ps — inside the 10 ps target, but with almost no margin for buffer and process variation.
 
 ### Step 3: Design an H-tree distribution
 
@@ -61,23 +61,23 @@ After equalization:
 
 | Path | Physical distance (um) | Wire delay (ps) | Buffer stages | Total delay (ps) |
 |---|---|---|---|---|
-| PLL to BL0 | 750 + 750 = 1500 | 12,450 | 2 | 12,450 + 60 = 12,510 |
-| PLL to BL1 | 750 + 250 + 500(serp) = 1500 | 12,450 | 2 | 12,510 |
-| PLL to BL2 | 750 + 250 + 500(serp) = 1500 | 12,450 | 2 | 12,510 |
-| PLL to BL3 | 750 + 750 = 1500 | 12,450 | 2 | 12,510 |
+| PLL to BL0 | 750 + 750 = 1500 | 12.45 | 2 | 12.45 + 60 = 72.45 |
+| PLL to BL1 | 750 + 250 + 500(serp) = 1500 | 12.45 | 2 | 72.45 |
+| PLL to BL2 | 750 + 250 + 500(serp) = 1500 | 12.45 | 2 | 72.45 |
+| PLL to BL3 | 750 + 750 = 1500 | 12.45 | 2 | 72.45 |
 
 ### Step 5: Verify skew
 
 All paths have identical wire length (1500 um) and buffer count (2 stages). The residual skew comes from process variation in metal width and buffer delay:
 
-- Wire delay variation: plus or minus 3% = plus or minus 373 ps (systematic variation cancelled by H-tree symmetry; random variation approximately plus or minus 50 ps)
-- Buffer delay variation: plus or minus 5% per stage = plus or minus 3 ps per stage, 2 stages = plus or minus 4.2 ps (RSS)
+- Wire delay variation: plus or minus 3% of 12.45 ps = plus or minus 0.37 ps (and systematic variation largely cancels by H-tree symmetry)
+- Buffer delay variation: plus or minus 5% per stage = plus or minus 1.5 ps per stage, 2 stages = plus or minus 2.1 ps (RSS)
 
-Total estimated skew: sqrt(50^2 + 4.2^2) = approximately 50 ps. This still exceeds the 10 ps target.
+Total estimated skew: sqrt(0.37^2 + 2.1^2) = approximately 2.1 ps. This meets the 10 ps target; buffer mismatch, not wire length, dominates.
 
 ### Step 6: Refine with tighter physical matching
 
-To achieve 10 ps skew, additional measures are needed:
+To hold margin against the 10 ps target, the usual measures are:
 1. Use same metal layer (M10) for all branches -- eliminates layer-to-layer variation
 2. Route all branches in the same metal environment (same neighboring density) -- reduces systematic variation
 3. Use matched buffer cells from the same standard cell library with common-centroid placement

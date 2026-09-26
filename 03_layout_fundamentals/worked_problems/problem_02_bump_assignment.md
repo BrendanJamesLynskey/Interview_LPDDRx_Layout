@@ -66,13 +66,13 @@ Row 6:   VDDQ   CK     CK_n   VSS    VSS    VDDQ   VSS    VSS
 Signal bumps: DQ0-DQ7 (8) + DQS/DQS_n (2) + WCK/WCK_n (2) + CA0-CA6 (7) + CK/CK_n (2) + CS_n (1) + ZQ (1) = 23. Correct.
 
 VDDQ bumps: Row 2 (4) + Row 4 (2) + Row 5 (2) + Row 6 (2) = 10
-VSS bumps: Row 1 (4) + Row 3 (3) + Row 4 (1) + Row 5 (2) + Row 6 (3) + spare = 13 + 2 spare = 15
+VSS bumps: Row 1 (4) + Row 3 (3) + Row 4 (2) + Row 5 (2) + Row 6 (4) = 15 (the 2 spare positions are used as extra VSS)
 
 Total power/ground: 10 + 15 = 25. Signal-to-power ratio = 23:25 ~ 1:1.1. Acceptable.
 
 ### Step 6: Verify signal integrity considerations
 
-- Every DQ signal has at least one adjacent VSS bump for return current path
+- Every DQ signal is next to a power/ground bump for its return current (DQ1, DQ5 and DQ7 see VSS only diagonally, with VDDQ alongside)
 - DQS differential pair is on adjacent bumps (Row 3, columns 2-3)
 - WCK differential pair is on adjacent bumps (Row 3, columns 5-6)
 - CK differential pair is on adjacent bumps (Row 6, columns 2-3)
